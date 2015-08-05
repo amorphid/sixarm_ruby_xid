@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
-=begin rdoc
-XID class.
-=end
+# rdoc
+# XID class.
 
-require "securerandom"
-require "digest/sha2"
+require 'securerandom'
+require 'digest/sha2'
 
 class XID < String
-
   # Initialize a new XID, optionally with a string.
   #
   # Example:
@@ -19,7 +17,7 @@ class XID < String
   # Return: [XID] A new XID
   #
   def initialize(s = nil)
-    s and (XID.valid?(s) or raise ArgumentError)
+    s && (XID.valid?(s) || fail(ArgumentError))
     super(s || SecureRandom.hex)
   end
 
@@ -95,7 +93,6 @@ class XID < String
   # Return: [XID] A new XID
   #
   def self.parse(s)
-    XID.new(s.downcase.gsub(/[^0-9a-f]/,'')[0...32])
+    XID.new(s.downcase.gsub(/[^0-9a-f]/, '')[0...32])
   end
-
 end
